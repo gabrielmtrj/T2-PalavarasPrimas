@@ -19,23 +19,27 @@ public class PalavrasPrimas {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
         int n;
+        //Declaração de um vetor de palavras
         String [] palavras;
         Scanner ler = new Scanner(System.in);
         
-        
+        // Define a quantidade de palavras que serão verificadas
         System.out.println("Entre com o numero de palavras que deseja verificar:");
         n = ler.nextInt();
        
         palavras = new String[n];
         
+        //Enquanto o vetor de palavras não for preenchido continua o for
         for(int i = 0; i<n;i++)
         {
             System.out.println("Entre a palavra " + (i+1) + ":");
             palavras[i] = ler.next();
             
+            //Se a palavra conter qualquer carcter que não seja uma letra permitida ela será invalida
             if(palavras[i].matches("^[a-zA-Z2]*$"))
+                //chama a função para o calculo do valor da palavra em numeros
                 valor(palavras[i], palavras[i].length());
             else
             {
@@ -52,25 +56,29 @@ public class PalavrasPrimas {
         char[] letra = new char[n];
         Boolean primo = false;
 
-        
+        //tranforma a palavra em um vetor de Char
         for(int i=0; i<n;i++)
         {
         letra[i] = palavra.charAt(i);
         }
         
+        //vai verificar qual numero referente a cada letra da palavra
         for(int i=0; i<n; i++)
         {
+            /*usando ASCII para definir um numero a letra, caso seja minuscula
+            será subtraido 96 do valor ASCII, caso seja maiúscula será subtraido 38.*/
            if(Character.isLowerCase(letra[i]))
                ascii[i] = (int)letra[i]-96;
            else if (Character.isUpperCase(letra[i]))
                ascii[i] = (int)letra[i]-38;
         }
+        //chama função para a soma dos valores encontrados, recebendo um boolean
         primo = primo(ascii,n);
         
         if(primo == true)
-            System.out.println("A palavra é prima."); 
+            System.out.println("It is a prime word."); 
         else
-            System.out.println("A palavra não é prima.");         
+            System.out.println("It is not a prime word.");         
     }
     
     public static Boolean primo(int[] numeros, int n){
@@ -80,16 +88,19 @@ public class PalavrasPrimas {
         soma=0;
         cont =0;
         
+        //soma todos os numeros do vetor que corresponde as letras
         for(int i = 0; i<n; i++)
         {
             soma = soma + numeros[i];  
         }
         
+        //verifica se está soma é prima ou não
         for(int i=1; i<=soma;i++){
             if(soma % i == 0)
                 cont ++;    
         }
         
+        //se a soma for divisivel por mais de 2 numeros não é primo
         if (cont > 2)
             return false;
         else
